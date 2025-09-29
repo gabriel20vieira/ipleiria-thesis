@@ -8,6 +8,7 @@
 PAPER=IPLeiriaMain.tex
 SHELL=/bin/bash
 TOOL=latexmk
+FINAL_PDF=Dissertation__Next_Generation_Network_Management.pdf
 
 all:
 	@echo "Building $(PAPER) with $(TOOL)..."
@@ -20,6 +21,12 @@ else
 	@exit 1
 endif
 	@echo "Build complete."
+	ifneq ($(PAPER:.tex=.pdf), $(FINAL_PDF))
+		@echo "Renaming PDF to $(FINAL_PDF)..."
+		@rm -f $(FINAL_PDF)
+		@mv $(PAPER:.tex=.pdf) $(FINAL_PDF)
+		@echo "Rename complete."
+	endif
 
 clean:
 	@echo "Cleaning up..."
